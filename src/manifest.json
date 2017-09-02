@@ -1,0 +1,46 @@
+{
+  "name": "myMDCM Enhanced",
+  "author": "kozirisdev",
+  "manifest_version": 2,
+  "version": "0.1.1",
+  "description": "Enhance the functionality of myMDCM",
+  "permissions" : [
+    "storage",
+    "webRequest", 
+    "declarativeContent",
+    "*://*.mcgill.ca/*"
+  ],
+  "background": {
+    "scripts": [ "js/backgroundHTTP.js", "js/background.js" ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "icons/mymdcm-256.png",
+      "128": "icons/mymdcm-256.png"
+    },
+    "default_popup": "menu/quicklinksMenu.html",
+    "default_title": "Click to view Quick Links Menu!"
+  },
+  "icons": {
+    "128": "icons/mymdcm-256.png"
+  },
+  "content_scripts" : [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://mymdcm.medicine.mcgill.ca/*"
+      ],
+      "js": [
+        "lib/jquery-1.11.2.min.js", 
+        "lib/icsLib.js", 
+        "js/mymdcmEnhanced.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+  ]
+}
+
+
+
