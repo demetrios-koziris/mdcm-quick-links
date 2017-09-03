@@ -1,0 +1,21 @@
+
+.formFooter-heightMask {
+	display: none !important;
+}
+
+.formFooter {
+	display: none !important;
+}
+
+.jotform-form {
+	padding: 0px !important;
+}
+
+#cid_1{
+	list-style: none !important;
+	padding-left: 0px !important;
+}
+
+.form-all {
+	width: 100% !important;
+}
