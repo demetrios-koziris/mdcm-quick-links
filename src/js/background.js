@@ -21,8 +21,8 @@ chrome.runtime.onInstalled.addListener(function (details) {
 
 	if (details.reason === "install") {
 		console.log("Installed myMDCM Enhanced version " + currentVersion);
-		chrome.tabs.create({url: "https://demetrios-koziris.github.io/myMDCM-enhanced"}, function (tab) {
-			console.log("New tab launched with https://demetrios-koziris.github.io/myMDCM-enhanced/");
+		chrome.tabs.create({url: "https://demetrios-koziris.github.io/myMDCM-enhanced/landing"}, function (tab) {
+			console.log("New tab launched with https://demetrios-koziris.github.io/myMDCM-enhanced/landing");
 		});
 	}
 	else if (details.reason === "update") {
