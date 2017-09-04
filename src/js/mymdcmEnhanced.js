@@ -35,22 +35,24 @@ chrome.extension.onMessage.addListener(function(msg, sender, sendResponse) {
 });
 
 function mymdcmRun(request) {
-	const row = document.createElement('div');
-	row.className = "row";
-	row.innerHTML = "<div class='col col-12'> <div class='t-Region t-Region--scrollBody js-apex-region'> <div class='t-Region-header'> <div class='t-Region-headerItems t-Region-headerItems--title'> <h2 class='t-Region-title' >myMDCM Enhanced: Export Calendar Feature</h2> </div><div class='t-Region-headerItems t-Region-headerItems--buttons'><span class='js-maximizeButtonContainer'></span></div></div><div class='t-Region-bodyWrap'> <div class='t-Region-buttons t-Region-buttons--top'> <div class='t-Region-buttons-left'></div><div class='t-Region-buttons-right'></div></div><div class='t-Form-fieldContainer rel-col'> <div class='t-Form-inputContainer col'> <span class='display_only'>Important: Please note that a calendar export will not stay updated if the source calendar is subject to change. Please periodically check your MDCM calendar to make sure you do not miss any events.</span> </div></div><div class='t-Region-body'> <div class='t-Form-fieldContainer rel-col'> <div class='t-Form-labelContainer col col-2'> <label class='t-Form-label'>Date Range</label> </div><div class='t-Form-inputContainer col'> <input type='text' class='u-TF-item--datepicker datepicker' id='mcen-export-cal-start'> </div><div class='t-Form-labelContainer col'> <label class='t-Form-label'>to</label> </div><div class='t-Form-inputContainer col'> <input type='text' class='u-TF-item--datepicker datepicker'id='mcen-export-cal-end'> </div></div><div class='t-Form-fieldContainer rel-col'> <div class='t-Form-labelContainer col col-2'> <label class='t-Form-label'>Export Type</label> </div><div class='t-Form-inputContainer col'> <div class='t-Form-itemWrapper'> <select class='selectlist apex-item-select' id='mcen-export-cal-type'> <option value='all' selected='selected'>Export all course events to one ICS file</option> <option value='split'>Export separate ICS file for each course</option> </select> </div></div></div><br><div class='t-Form-fieldContainer rel-col' style='float: right;'> <button type='button' class='t-Button t-Button--hot col' id='mcen-export-cal'>Export Calendar Events to ICS file</button> <div class='t-Form-labelContainer col'><label class='t-Form-label'></label></div><a href='https://digibites.zendesk.com/hc/en-us/articles/200134792-How-do-I-import-ics-ical-csv- fileinto-Google-Calendar-' class='t-Button col'>How to import ICS files into Google Calendar</a> </div></div></div></div></div>";
-	document.getElementsByClassName("container")[0].appendChild(row);
+	const CalendarExportRow = document.createElement('div');
+	CalendarExportRow.className = "row";
+	CalendarExportRow.id = "mymdcm-enh-calendar-export";
+	CalendarExportRow.innerHTML = "<div class='col col-12'> <div class='t-Region t-Region--scrollBody js-apex-region'> <div class='t-Region-header'> <div class='t-Region-headerItems t-Region-headerItems--title'> <h2 class='t-Region-title' >myMDCM Enhanced: Export Calendar Feature</h2> </div><div class='t-Region-headerItems t-Region-headerItems--buttons'><span class='js-maximizeButtonContainer'></span></div></div><div class='t-Region-bodyWrap'> <div class='t-Region-buttons t-Region-buttons--top'> <div class='t-Region-buttons-left'></div><div class='t-Region-buttons-right'></div></div><div class='t-Form-fieldContainer rel-col'> <div class='t-Form-inputContainer col'> <span class='display_only'>Important: Please note that a calendar export will not stay updated if the source calendar changes. If your MDCM calendar is subject to change, please periodically check it to make sure you do not miss any events.</span> </div></div><div class='t-Region-body'> <div class='t-Form-fieldContainer rel-col'> <div class='t-Form-labelContainer col col-2'> <label class='t-Form-label'>Date Range</label> </div><div class='t-Form-inputContainer col'> <input type='text' class='u-TF-item--datepicker datepicker' id='mymdcm-export-cal-start'> </div><div class='t-Form-labelContainer col'> <label class='t-Form-label'>to</label> </div><div class='t-Form-inputContainer col'> <input type='text' class='u-TF-item--datepicker datepicker'id='mymdcm-export-cal-end'> </div></div><div class='t-Form-fieldContainer rel-col'> <div class='t-Form-labelContainer col col-2'> <label class='t-Form-label'>Export Type</label> </div><div class='t-Form-inputContainer col'> <div class='t-Form-itemWrapper'> <select class='selectlist apex-item-select' id='mymdcm-export-cal-type'> <option value='all' selected='selected'>Export all course events to one ICS file</option> <option value='split'>Export separate ICS file for each course</option> </select> </div></div></div><br><div class='t-Form-fieldContainer rel-col' style='float: right;'> <button type='button' class='t-Button t-Button--hot col' id='mymdcm-export-cal'>Export Calendar Events to ICS file</button> <div class='t-Form-labelContainer col'><label class='t-Form-label'></label></div><a href='https://digibites.zendesk.com/hc/en-us/articles/200134792-How-do-I-import-ics-ical-csv- fileinto-Google-Calendar-' class='t-Button col'>How to import ICS files into Google Calendar</a> </div></div></div></div></div><div class='mymdcm-enh-dialog' id='mymdcm-enh-failed-request' title='Calendar Export: Failed Retrieval' style='display:none;'> <div style='padding:10px; background:#FFDAD7;'> <p>myMDCM Enhanced encountered an error while trying to retrieve your calendar events.</p><p>Please refresh the page and try again.</p><p>If the issue persists, please submit a bug report by clicking the link below to open the feedback page for myMDCM Enhanced.</p></div></div><div class='mymdcm-enh-dialog' id='mymdcm-enh-no-events' title='Calendar Export: No Events' style='display:none;'> <div style='padding:10px; background:#FFDAD7;'> <p>myMDCM Enhanced did not find any calendar events in the selected date range (Note that no events will be found if the end date is before the start date).</p><p>If there are indeed events between the start and end dates selected (inclusively), please refresh the page and try again.</p><p>If the issue persists, please submit a bug report by clicking the link below to open the feedback page for myMDCM Enhanced.</p></div></div><div class='mymdcm-enh-dialog' id='mymdcm-enh-default-error' title='Calendar Export: Error' style='display:none;'> <div style='padding:10px; background:#FFDAD7;'> <p>myMDCM Enhanced encountered an error while exporting your calendar.</p><p>Please refresh the page and try again.</p><p>If the issue persists, please submit a bug report by clicking the link below to open the feedback page for myMDCM Enhanced.</p></div></div>";
+	document.getElementsByClassName("container")[0].appendChild(CalendarExportRow);
 	injectScript('$(".datepicker").datepicker({dateFormat: "mm/dd/yy"});$(".datepicker").datepicker("setDate", new Date())');
-	document.getElementById('mcen-export-cal').setAttribute('onclick', 'document.dispatchEvent(new Event("mcenExportCalendar"));');
+	injectScript("$('.mymdcm-enh-dialog').dialog({autoOpen:!1,modal:true,position:{my:'bottom',at:'center',of:'#mymdcm-enh-calendar-export'},buttons:[{text:'OK',click:function(){$(this).dialog('close')}},{text:'Submit Bug Report',click:function(){window.location='https://demetrios-koziris.github.io/myMDCM-enhanced/support'}}]});");
+	document.getElementById('mymdcm-export-cal').setAttribute('onclick', 'document.dispatchEvent(new Event("mymdcmExportCalendar"));');
 
-	document.addEventListener('mcenExportCalendar', function(data) {
-		logForDebug('mcenExportCalendar');
+	document.addEventListener('mymdcmExportCalendar', function(data) {
+		logForDebug('mymdcmExportCalendar');
 		logForDebug(data);
 
 		const reqData = request.requestBody.formData;
 		const exportParams = {
-			type: document.getElementById('mcen-export-cal-type').selectedIndex,
-			start: document.getElementById('mcen-export-cal-start').value,
-			end: document.getElementById('mcen-export-cal-end').value
+			type: document.getElementById('mymdcm-export-cal-type').selectedIndex,
+			start: document.getElementById('mymdcm-export-cal-start').value,
+			end: document.getElementById('mymdcm-export-cal-end').value
 		};
 		const startDate = new Date(exportParams.start);
 		const endDate = new Date(exportParams.end);
@@ -86,32 +88,56 @@ function getCalendarJSON(reqURL, exportParams) {
 
 function generateGetCalendarJSONCallback(reqURL, exportParams) {
 	return function(data) {
-		const eventsData = JSON.parse(data.responseXML);
-		logForDebug(eventsData);
+		const start = document.getElementById('mymdcm-export-cal-start').value;
+		const end = document.getElementById('mymdcm-export-cal-end').value;
+		const failedRequest = 'myMDCM Enhanced encountered an error while trying to retrieve your calendar events.';
+		const noEventsFound = 'myMDCM Enhanced did not find any calendar events from '+start+' to '+end+' (inclusively).';
+		const defaultError = "myMDCM Enhanced encountered an error while exporting your calendar.";
+		logForDebug(data);
 
-		if (exportParams.type === 0) {
-			let eventsICS = ics();
-			for (let i = 0; i < eventsData.length; i++) {
-				let eventInfo = eventsData[i].title.match(/\>[^<>]+/g).map(function(e){return e.slice(1);});
-				eventsICS.addEvent(eventInfo[0], eventInfo[1], eventInfo[2], eventsData[i].start, eventsData[i].end);
+		try {
+			const eventsData = JSON.parse(data.responseXML);
+			logForDebug(eventsData);
+			
+			if ('error' in eventsData) {
+				console.log(failedRequest);
+				injectScript("$('#mymdcm-enh-failed-request').dialog('open')");
 			}
-			logForDebug(eventsICS);
-			eventsICS.download("myMDCM_Calendar_"+document.getElementById('mcen-export-cal-start').value+"_to_"+document.getElementById('mcen-export-cal-end').value+"_All");
-		}
-		else {
-			let eventsICS = {};
-			for (let i = 0; i < eventsData.length; i++) {
-				let eventInfo = eventsData[i].title.match(/\>[^<>]+/g).map(function(e){return e.slice(1);});
-				const eventCourse = eventInfo[0].split('-')[0].replace(/\s/g,'');
-				if (!(eventCourse in eventsICS)) {
-					eventsICS[eventCourse] = ics();
+			else if (eventsData.length === 0) {
+				console.log(noEventsFound);
+				injectScript("$('#mymdcm-enh-no-events').dialog('open')");
+			}
+			else {
+				if (exportParams.type === 0) {
+					const eventsICS = ics();
+					for (let i = 0; i < eventsData.length; i++) {
+						const eventInfo = eventsData[i].title.match(/\>[^<>]+/g).map(function(e){return e.slice(1);});
+						eventsICS.addEvent(eventInfo[0], eventInfo[1], eventInfo[2], eventsData[i].start, eventsData[i].end);
+					}
+					logForDebug(eventsICS);
+					eventsICS.download("myMDCM_Calendar_"+start+"_to_"+end+"_All");
 				}
-				eventsICS[eventCourse].addEvent(eventInfo[0], eventInfo[1], eventInfo[2], eventsData[i].start, eventsData[i].end);
-			}
-			logForDebug(eventsICS);
-			for (var course in eventsICS) {
-				eventsICS[course].download("myMDCM_Calendar_"+document.getElementById('mcen-export-cal-start').value+"_to_"+document.getElementById('mcen-export-cal-end').value+"_"+course);
+				else {
+					const eventsICS = {};
+					for (let i = 0; i < eventsData.length; i++) {
+						const eventInfo = eventsData[i].title.match(/\>[^<>]+/g).map(function(e){return e.slice(1);});
+						const eventCourse = eventInfo[0].split('-')[0].replace(/\s/g,'');
+						if (!(eventCourse in eventsICS)) {
+							eventsICS[eventCourse] = ics();
+						}
+						eventsICS[eventCourse].addEvent(eventInfo[0], eventInfo[1], eventInfo[2], eventsData[i].start, eventsData[i].end);
+					}
+					logForDebug(eventsICS);
+					for (let course in eventsICS) {
+						eventsICS[course].download("myMDCM_Calendar_"+start+"_to_"+end+"_"+course);
+					}
+				}
 			}
 		}
+		catch(err) {
+			console.log(defaultError);
+            console.log('Error: ' + err.stack);
+            injectScript("$('#mymdcm-enh-default-error').dialog('open')");
+        }
 	};
 }

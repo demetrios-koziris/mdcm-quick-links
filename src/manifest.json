@@ -2,13 +2,14 @@
   "name": "myMDCM Enhanced",
   "author": "kozirisdev",
   "manifest_version": 2,
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Enhance the functionality of myMDCM",
   "permissions" : [
     "storage",
     "webRequest", 
     "declarativeContent",
-    "*://*.mcgill.ca/*"
+    "*://*.mcgill.ca/*",
+    "*://github.com/demetrios-koziris/*"
   ],
   "background": {
     "scripts": [ "js/backgroundHTTP.js", "js/background.js" ],
