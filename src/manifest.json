@@ -2,14 +2,14 @@
   "name": "myMDCM Enhanced",
   "author": "kozirisdev",
   "manifest_version": 2,
-  "version": "0.1.6",
+  "version": "1.0.0",
   "description": "Enhance the functionality of myMDCM",
   "permissions" : [
     "storage",
     "webRequest", 
     "declarativeContent",
     "*://*.mcgill.ca/*",
-    "*://github.com/demetrios-koziris/*"
+    "*://demetrios-koziris.github.io/*"
   ],
   "background": {
     "scripts": [ "js/backgroundHTTP.js", "js/background.js" ],
@@ -17,14 +17,14 @@
   },
   "browser_action": {
     "default_icon": {
-      "38": "icons/mymdcm-512.png",
-      "128": "icons/mymdcm-512.png"
+      "38": "icons/mymdcm-128.png",
+      "128": "icons/mymdcm-128.png"
     },
     "default_popup": "menu/quicklinksMenu.html",
     "default_title": "Click to view Quick Links Menu!"
   },
   "icons": {
-    "128": "icons/mymdcm-512.png"
+    "128": "icons/mymdcm-128.png"
   },
   "content_scripts" : [
     {
