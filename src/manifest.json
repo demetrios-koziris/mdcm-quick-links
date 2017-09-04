@@ -2,7 +2,7 @@
   "name": "myMDCM Enhanced",
   "author": "kozirisdev",
   "manifest_version": 2,
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Enhance the functionality of myMDCM",
   "permissions" : [
     "storage",
