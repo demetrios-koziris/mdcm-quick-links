@@ -112,7 +112,13 @@ function generateGetCalendarJSONCallback(reqURL, exportParams) {
 					const eventsICS = ics();
 					for (let i = 0; i < eventsData.length; i++) {
 						const eventInfo = eventsData[i].title.match(/\>[^<>]+/g).map(function(e){return e.slice(1);});
-						eventsICS.addEvent(eventInfo[0], eventInfo[1], eventInfo[2], eventsData[i].start, eventsData[i].end);
+						eventsICS.addEvent(
+							eventInfo[0] + ' (' + eventInfo[2] + ')', 
+							eventInfo[2] + ':\\n' + eventInfo[0], 
+							eventInfo[1], 
+							eventsData[i].start, 
+							eventsData[i].end
+						);
 					}
 					logForDebug(eventsICS);
 					eventsICS.download("myMDCM_Calendar_"+start+"_to_"+end+"_All");
@@ -121,11 +127,17 @@ function generateGetCalendarJSONCallback(reqURL, exportParams) {
 					const eventsICS = {};
 					for (let i = 0; i < eventsData.length; i++) {
 						const eventInfo = eventsData[i].title.match(/\>[^<>]+/g).map(function(e){return e.slice(1);});
-						const eventCourse = eventInfo[0].split('-')[0].replace(/\s/g,'');
+						const eventCourse = eventInfo[2].split('-')[0].replace(/\s/g,'');
 						if (!(eventCourse in eventsICS)) {
 							eventsICS[eventCourse] = ics();
 						}
-						eventsICS[eventCourse].addEvent(eventInfo[0], eventInfo[1], eventInfo[2], eventsData[i].start, eventsData[i].end);
+						eventsICS[eventCourse].addEvent(
+							eventInfo[0] + ' (' + eventInfo[2] + ')', 
+							eventInfo[2] + ':\\n' + eventInfo[0], 
+							eventInfo[1], 
+							eventsData[i].start, 
+							eventsData[i].end
+						);
 					}
 					logForDebug(eventsICS);
 					for (let course in eventsICS) {
