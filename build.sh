@@ -50,7 +50,7 @@ for browser in "$@"; do
 	fi 
 
 	today=`date '+%Y_%m_%d__%H_%M_%S'`;
-	buildname="myMDCMenhanced__"$today"__"$browser
+	buildname="MDCM-Quick-Links__"$today"__"$browser
 	echo "$0: Creating $browser version in build/$buildname"
 	mkdir -p build
 
@@ -63,7 +63,7 @@ for browser in "$@"; do
 		sed -i "s/$match/$match\n$insert/" $file
 
 		cd src
-		zip -rq ../build/$buildname.xpi css icons js lib menu manifest.json
+		zip -rq ../build/$buildname.xpi css icons menu manifest.json
 		cd ..
 
 		sed -i '/"gecko"/d' $file   
@@ -74,7 +74,7 @@ for browser in "$@"; do
 	if [ $browser == chrome ]; then
 
 		cd src
-		zip -rq ../build/$buildname.zip css icons js lib menu manifest.json
+		zip -rq ../build/$buildname.zip css icons menu manifest.json
 		cd ..
 
 	fi

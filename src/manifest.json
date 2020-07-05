@@ -1,20 +1,9 @@
 {
-  "name": "myMDCM Enhanced",
+  "name": "MDCM Quick Links",
   "author": "kozirisdev",
   "manifest_version": 2,
-  "version": "1.0.5",
-  "description": "Enhance the functionality of myMDCM",
-  "permissions" : [
-    "storage",
-    "webRequest", 
-    "declarativeContent",
-    "*://*.mcgill.ca/*",
-    "*://demetrios-koziris.github.io/*"
-  ],
-  "background": {
-    "scripts": [ "js/backgroundHTTP.js", "js/background.js" ],
-    "persistent": true
-  },
+  "version": "1.1.0",
+  "description": "Quicklinks Menu for McGill Med Students",
   "browser_action": {
     "default_icon": {
       "38": "icons/mymdcm-128.png",
@@ -25,20 +14,7 @@
   },
   "icons": {
     "128": "icons/mymdcm-128.png"
-  },
-  "content_scripts" : [
-    {
-      "run_at": "document_start",
-      "matches": [
-        "*://mymdcm.medicine.mcgill.ca/*"
-      ],
-      "js": [
-        "lib/jquery-1.11.2.min.js", 
-        "lib/icsLib.js", 
-        "js/calendarExport.js"
-      ]
-    }
-  ]
+  }
 }
 
 

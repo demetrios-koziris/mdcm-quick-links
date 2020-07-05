@@ -1,12 +1,12 @@
-# myMDCM-enhanced
-Browser extension enhancing the functionality of the McGill's myMDCM website
+# MDCM Quick Links
+Browser extension providing an easy way to access MDCM related links
 
 <h4>
-  <a href="https://demetrios-koziris.github.io/myMDCM-enhanced/chrome">Download from the Google Chrome Store</a>
+  <a href="https://demetrios-koziris.github.io/mdcm-quick-links/chrome">Download from the Google Chrome Store</a>
 </h4>
 
 <h4>
-  <a href="https://demetrios-koziris.github.io/myMDCM-enhanced/">View the myMDCM Enhanced landing page</a>
+  <a href="https://demetrios-koziris.github.io/mdcm-quick-links/">View the MDCM Quick Links landing page</a>
 </h4>
 
 <br>
@@ -15,12 +15,12 @@ Browser extension enhancing the functionality of the McGill's myMDCM website
   Features
 </h2>
 
-myMDCM Enhanced is a browser extension that enhances the experience of using the myMDCM website. It allows you to export your schedule as an ICS file that can be imported into other calendar apps and provides a quick links menu that you can access by clicking the myMDCM Enhanced icon in the chrome menu bar.
+MDCM Quick Links is a browser extension providing an easy way to access MDCM related links.
 
-For a full list of features, please see the following link:
+MDCM Quick Links was previously named myMDCM Enhanced and had functionality allowing users to export their myMDCM calendar schedule. The extension was renamed when this calendar export functionality was deprecated.
 
 <h4>
-  <a href="https://demetrios-koziris.github.io/myMDCM-enhanced/features">View Detailed Feature List</a>
+  <a href="https://demetrios-koziris.github.io/mdcm-quick-links/features">View Detailed Feature List</a>
 </h4>
 
 <br>
@@ -29,7 +29,7 @@ For a full list of features, please see the following link:
 License
 </h2>
 
-myMDCM Enhanced is a chrome extension that improves the functionality of the myMDCM website.
+MDCM Quick Links is a chrome extension that provides an easy way to access MDCM related links.
 Copyright (C) 2017 Demetrios Koziris. McGill and myMDCM have no affiliation with this software.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License 
